@@ -29,7 +29,12 @@ class MyHomePage extends StatelessWidget {
       amount: 16.53, 
       date: DateTime.now(),
     ),
-  ]; 
+  ];
+  //String titleInput; 
+  //String amountInput; 
+
+  final titleController = TextEditingController(); 
+  final amountController = TextEditingController(); 
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Gastos'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container( 
@@ -49,6 +54,40 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column( 
+                crossAxisAlignment: CrossAxisAlignment.end,
+               children: [
+                TextField( 
+                  decoration: const InputDecoration( labelText: 'Titulo' ),
+                  controller: titleController, 
+                  onChanged: (val) {
+                    //titleInput = val; 
+                  },
+                ),
+                TextField( 
+                  decoration: const InputDecoration( labelText: 'Cantidad' ),
+                  controller: amountController,
+                  onChanged: (val){
+                    //amountInput = val; 
+                  }, 
+                ),
+                TextButton( 
+                  style: TextButton.styleFrom(
+                    primary: Colors.purple,
+                  ),
+                  child: const Text('Agregar gasto'), 
+                  onPressed: (){
+                    print(titleController.text); 
+                    print(amountController.text); 
+                  },
+                ),
+              ]),
+            ),
+          ),
           Column(
             children: transactions.map(
               (tx){
@@ -56,7 +95,7 @@ class MyHomePage extends StatelessWidget {
                   child: Row(
                     children: [
                         Container(
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                             vertical: 10, 
                             horizontal: 15),
                           decoration: BoxDecoration(
@@ -65,10 +104,10 @@ class MyHomePage extends StatelessWidget {
                               width: 2, 
                             )
                           ),
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Text(
                             '\$ ${tx.amount}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                               color: Colors.purple, 
@@ -80,14 +119,14 @@ class MyHomePage extends StatelessWidget {
                           children: [
                             Text(
                               tx.title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16, 
                                 fontWeight: FontWeight.bold
                               )
                             ),
                             Text(
                               DateFormat.yMMMd().format(tx.date),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.grey, 
                               ),
                             ),

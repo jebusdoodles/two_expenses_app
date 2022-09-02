@@ -6,9 +6,9 @@ class Transaction{
 
 
   Transaction({
-    required this.id,
-    required this.title, 
-    required this.amount,
-    required this.date
+    this.id,
+    this.title, 
+    this.amount,
+    this.date
   }); 
 }
