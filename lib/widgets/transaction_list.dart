@@ -12,11 +12,9 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container( 
       height: 300,
-      child: SingleChildScrollView(
-        child: Column(
-            children: transactions.map(
-              (tx){
-                return Card(
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {
+          return Card(
                   child: Row(
                     children: [
                         Container(
@@ -31,7 +29,7 @@ class TransactionList extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            '\$ ${tx.amount}',
+                            '\$ ${transactions[index].amount.toStringAsFixed(2)}',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -43,14 +41,14 @@ class TransactionList extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              tx.title,
+                              transactions[index].title,
                               style: const TextStyle(
                                 fontSize: 16, 
                                 fontWeight: FontWeight.bold
                               )
                             ),
                             Text(
-                              DateFormat.yMMMd().format(tx.date),
+                              DateFormat.yMMMd().format(transactions[index].date),
                               style: const TextStyle(
                                 color: Colors.grey, 
                               ),
@@ -60,10 +58,9 @@ class TransactionList extends StatelessWidget {
                       ],
                     ), 
                 ); 
-              }
-            ).toList(),
+          },
+          itemCount: transactions.length,
         )
-      )
     );
   }
 }
