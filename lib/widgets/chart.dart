@@ -17,12 +17,15 @@ class Chart extends StatelessWidget {
         if(recentTransactions[i].date.day == weekDay.day && 
           recentTransactions[i].date.month == weekDay.month &&
           recentTransactions[i].date.year == weekDay.year){
-            totalSum += recentTransactions[i].amount; 
+            totalSum = totalSum + recentTransactions[i].amount; 
           }
       }
 
+      print(DateFormat.E().format(weekDay));
+      print(totalSum);
+
       return { 
-        'day': DateFormat.E(weekDay), 
+        'day': DateFormat.E().format(weekDay), 
         'amount': totalSum 
       };
      });
@@ -30,6 +33,7 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(groupedTransactionValues); 
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
